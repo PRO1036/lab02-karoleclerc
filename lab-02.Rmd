@@ -1,7 +1,7 @@
 ---
 title: "Lab 02 - Plastic waste"
-author: "Votre nom"
-date: "La date"
+author: "Karol-Anne Leclerc"
+date: "15 septembre"
 output: github_document
 ---
 
@@ -28,13 +28,19 @@ plastic_waste <- plastic_waste %>%
 ### Exercise 1
 
 ```{r plastic-waste-continent}
-# insert code here
+ggplot(data = plastic_waste, aes (x = plastic_waste_per_cap)) + geom_histogram(binwidth = 0.2) + facet_wrap("continent")
 ```
 
 ### Exercise 2
 
 ```{r plastic-waste-density}
-# insert code here
+ggplot(plastic_waste, aes(x=plastic_waste_per_cap)) + geom_density()
+
+ggplot(plastic_waste, aes(x=plastic_waste_per_cap, color=continent)) + geom_density(linewidth=0.25)
+
+ggplot(plastic_waste, aes(x=plastic_waste_per_cap, color=continent, fill=continent)) + geom_density(linewidth=0.25)
+
+ggplot(plastic_waste, aes(x=plastic_waste_per_cap, color=continent, fill=continent)) + geom_density(alpha=0.25, linewidth=0.25)
 ```
 
 Réponse à la question...
