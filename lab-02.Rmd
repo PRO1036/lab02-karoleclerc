@@ -30,6 +30,7 @@ plastic_waste <- plastic_waste %>%
 ```{r plastic-waste-continent}
 ggplot(data = plastic_waste, aes (x = plastic_waste_per_cap)) + geom_histogram(binwidth = 0.2) + facet_wrap("continent")
 ```
+En comparant les contients selon leur quantité de déchets plastiques par habitant, il est possible d'observer que l'Europe, l'Amérique du Nord ainsi que l'Asie sont les 3 continents avec les plus gros producteurs de déchets plastiques par habitant. Plus précisément, l'Amérique du Nord, semble être le continent avec la plus grosse production de déchets plastiques par habitant avec le plus haut taux d'habitants dépassant les 0,5kg/jour. Quant à l'Amérique du Sud, l'Océanie et l'Afrique, ceux-ci sont les 3 continents avec la moins grande production de déchets plastiques par habitant. De plus, concernant les 6 continents, il est possible d'observer qu'une majorité de leurs habitants se situent autour d'une production de déchets plastiques d'environ 10 à 30 kg/jour.
 
 ### Exercise 2
 
@@ -43,42 +44,45 @@ ggplot(plastic_waste, aes(x=plastic_waste_per_cap, color=continent, fill=contine
 ggplot(plastic_waste, aes(x=plastic_waste_per_cap, color=continent, fill=continent)) + geom_density(alpha=0.25, linewidth=0.25)
 ```
 
-Réponse à la question...
+Les réglages de la couleur et de la transparence ne se trouvent pas au même endroit, car ils ne remplissent pas la même fonction. En effet, les réglages "color" et "fill" présents dans "aes" sont des paramètres qui vont varier selon la valeur d'une variable et ainsi créer une légende pour l'accompagner. D'un autre côté, le réglage "alpha" se trouvant dans "geom_density" est un paramètre modifiant le visuel général du graphique, soit tous ses éléments. Donc, ce paramètre est fixe et ne variera pas selon les données comme pour les paramètres sous "aes".  
 
 ### Exercise 3
 
 Boxplot:
 
 ```{r plastic-waste-boxplot}
-# insert code here
+ggplot(plastic_waste, aes(x=continent, y=plastic_waste_per_cap))+geom_boxplot()
 ```
 
 Violin plot:
 
 ```{r plastic-waste-violin}
-# insert code here
+ggplot(plastic_waste, aes(x=continent, y=plastic_waste_per_cap))+geom_violin()
 ```
 
-Réponse à la question...
+Contrairement aux boxplots, les violin plots permettent d'avoir une meilleur visualisation de la distribution des données, soit certaines variations vu sa structure plus variable que les rectangles/boites. Les violin plots permettent donc de pouvoir observer les concentrations des données sur plusieurs valeurs. 
 
 ### Exercise 4
 
 
 ```{r plastic-waste-mismanaged}
-# insert code here
+ggplot(plastic_waste, aes(x=plastic_waste_per_cap, y=mismanaged_plastic_waste_per_cap))+geom_point()
+
+ggplot(plastic_waste, aes(x=plastic_waste_per_cap, y=mismanaged_plastic_waste_per_cap, colour = continent))+geom_point()
 ```
 
-Réponse à la question...
+La relation entre la quantité de déchet et la quantité de déchets non gérés semble être positive et de façon générale, linéaire. Ainis, chez un pays, plus la quantité de déchets plastiques produite par habitant est grande et plus la quantité de déchets plastique non gérés par habitant semble augmenter.
+Or, cette tendance ne semble pas être identique pour chaque continent. En effet, par exemple, pour l'Amérique du Nord et surtout l'Europe, nous pouvons observer une moins grande quantité de points démontrant des taux élevés de déchets non gérés. Donc, pour certains cas où la quantité de déchets plastiques par habitant est élevé, la quantité de déchets plastiques non gérés par habitant n'augmente pas de manière proportionnelle. D'un autre côté, chez d'autres continents comme l'Afrique, l'Asie et l'Océanie, la tendance positive mentionnée précédemment semble se maintenir, soit qu'à des taux élevés de déchets plastiques générés par habitant, la quantité de déchest plastiques non gérés par habitant augmente.
 
 ### Exercise 5
 
 
 ```{r plastic-waste-population-total}
-# insert code here
+ggplot(plastic_waste, aes(x=plastic_waste_per_cap, y=total_pop))+geom_point()
 ```
 
 ```{r plastic-waste-population-coastal}
-# insert code here
+ggplot(plastic_waste, aes(x=plastic_waste_per_cap, y=coastal_pop))+geom_point()
 ```
 
 Réponse à la question...
@@ -88,5 +92,9 @@ Réponse à la question...
 Recréez la visualisation:
 
 ```{r recreate-viz}
-# insert code here
+plastic_waste_coastal <- plastic_waste %>% 
+  mutate(coastal_pop_prop = coastal_pop / total_pop) %>%
+  filter(plastic_waste_per_cap < 3)
+
+ggplot(plastic_waste, mapping= aes( x=coastal_pop/total_pop, y=plastic_waste_per_cap, colour = continent))+geom_point()+labs(title = "Quantité de déchets plastiques vs Proportion de la population côtière", subtitle = "Selon le continent", y="Nombre de déchets plastiques par habitant", x="Proportion de la population côtière (Coastal / total population)", colour="Continent")+geom_smooth(method = loess(), se= TRUE)
 ```
