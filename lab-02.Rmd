@@ -30,6 +30,7 @@ plastic_waste <- plastic_waste %>%
 ```{r plastic-waste-continent}
 ggplot(data = plastic_waste, aes (x = plastic_waste_per_cap)) + geom_histogram(binwidth = 0.2) + facet_wrap("continent")
 ```
+
 En comparant les contients selon leur quantité de déchets plastiques par habitant, il est possible d'observer que l'Europe, l'Amérique du Nord ainsi que l'Asie sont les 3 continents avec les plus gros producteurs de déchets plastiques par habitant. Plus précisément, l'Amérique du Nord, semble être le continent avec la plus grosse production de déchets plastiques par habitant avec le plus haut taux d'habitants dépassant les 0,5kg de déchets plastiques par jour. Quant à l'Amérique du Sud, l'Océanie et l'Afrique, ceux-ci sont les 3 continents avec la moins grande production de déchets plastiques par habitant. De plus, concernant les 6 continents, il est possible d'observer qu'une majorité de leurs habitants se situent autour d'une production de déchets plastiques d'environ 10 à 30 kg/jour.
 
 ### Exercise 2
@@ -85,7 +86,7 @@ ggplot(plastic_waste, aes(x=plastic_waste_per_cap, y=total_pop))+geom_point()
 ggplot(plastic_waste, aes(x=plastic_waste_per_cap, y=coastal_pop))+geom_point()
 ```
 
-Il semble y avoir une relation plus forte entre la paire de variables de la population vivant sur des côtes en fonction de la quantité de déchets plastiques par habitant. Effectivement, la population coastale semble plus influencer la quantité de déchets plastiques par habitant que la population totale. 
+Il semble y avoir une relation plus forte entre la paire de variables comprenant la population vivant sur des côtes et la quantité de déchets plastiques par habitant. Effectivement, la population coastale semble plus influencer la quantité de déchets plastiques par habitant que la population totale. 
 
 ## Conclusion
 
